@@ -1,66 +1,74 @@
-# Shower Presentation Template [![Build Status](https://travis-ci.org/shower/shower.svg?branch=master)](https://travis-ci.org/shower/shower)
-
-<img src="pictures/logo.png" width="250" alt="Shower logo">
-
-> Shower ['ʃəuə] noun. A person or thing that shows.
-
-1. Built on HTML, CSS and vanilla JavaScript
-2. Works in all modern browsers
-3. Themes are separated from engine
-4. Fully keyboard accessible
-5. Printable to PDF
-
-[See it in action](http://shwr.me/). Includes [Ribbon](https://github.com/shower/ribbon/) and [Material](https://github.com/shower/material/) themes, and [core](https://github.com/shower/core/) with plugins.
-
-Follow [@shower_me](https://twitter.com/shower_me) for support and updates, [file an issue](https://github.com/shower/shower/issues/new) if you have any.
-
-## Quick Start
-
-1. Download and unzip [template archive](http://shwr.me/shower.zip)
-2. Open `index.html` and start creating your presentation
-
-## Deploy to Netlify
-
-By clicking the button below you can fork this repo and deploy it to Netlify.
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/shower/shower)
-
-By doing this you would get a GitHub repo linked with Netlify in a way any change to the repo would trigger a shower rebuild and deploy to Netlify servers, which allows for a really easy way to create and share Shower presentation without the need to install anything locally.
-
-## Advanced
-
-1. Сlone this repository `git clone --depth=1 git@github.com:shower/shower.git`, (`--depth=1` will make it way faster).
-2. [Create](https://github.com/new) a new blank repository and copy its cloning address `git@github.com:USER/REPO.git`.
-3. Change remote of your local clone to the one you’ve just copied `git remote set-url origin git@github.com:USER/REPO.git`.
-4. Push your local clone to GitHub `git push -u origin master`.
-6. Install dependencies `npm install` and start it `npm start`.
-
-Once you’re done you can build a clean copy of your slides:
-
-    npm run prepare
-
-And you’ll find your presentation in `prepared` folder with only needed files in it. You can also run `npm run archive` to get the same files in `archive.zip`. But there’s more! You can easily publish your presentation online by running:
-
-    npm run publish
-
-And you’ll have your slides published to `http://USER.github.io/REPO/`.
-
-## Usage Examples
-
-- [Inhuman UI](https://pepelsbey.net/pres/inhuman-ui/)
-- [My Vanilla CSS](https://pepelsbey.net/pres/vanilla-css/)
-- [I’m in IoT](https://pepelsbey.net/pres/im-in-iot/)
-- [Enough Bricks](https://pepelsbey.net/pres/enough-bricks/)
-
-## Browser Support
-
-Latest stable versions of Chrome, Edge, Firefox, and Safari are supported.
-
-## Contributing
-
-You’re always welcome to contribute. Fork project, make changes and send it as pull request. But it’s better to file an [issue](https://github.com/shower/shower/issues) with your idea first. Read [contributing rules](CONTRIBUTING.md) for more details.
-
-Main contributors in historical order: [pepelsbey](https://github.com/pepelsbey), [jahson](https://github.com/jahson), [miripiruni](https://github.com/miripiruni), [kizu](https://github.com/kizu), [artpolikarpov](https://github.com/artpolikarpov), [tonyganch](https://github.com/tonyganch), [zloylos](https://github.com/zloylos).
-
----
-Licensed under [MIT License](LICENSE.md).
+# Слайд 1
+Привет. Сегодня я расскажу что такое асинхронный JavaScript и как его использовать.
+Для начала, давайте разберёмся, что означает слово "Асинхронный".
+# Слайд 2
+Асинхронность - не совпадение с чем-либо во времени; неодномоментность, неодновременность, несинхронность - характеризует процессы, не совпадающие во времени.
+Т.е. асинхронные процессы - это такие, которые происходять независимо друг от друга.
+# Слайд 3
+Зачем это нужно? Давайте на практике посмотрим, чем отличаются синхронные и асинхронные запросы.
+(Пример)
+Как же это работает?
+# Слайд 4
+Первое, важное замечание: В JavaScript только один поток.
+Как же тогда работают асинхронные функции?
+# Слайд 5
+Давайте разберём, как устроена работа JavaScript в браузере:
+Помимо самого JavaScript, который содержит "Область Памяти" (Heap) и "Стек Вызовов" (Call Stack), в браузере также есть набор WEB API.
+Это, например, API для взаимодействия с DOM, XMLHttpRequest, или даже setTimeout.
+Эти API не являются частью JavaScript, мы можем вызвать их методы из любой части программы, и они будут выполняться независимо от основного потока JavaScript.
+Чтобы получить результат работы такого метода, как правило, необходимо передать "функцию обратного вызова" (callback).
+После завершения работы метода API, callback не может просто вклиниться в работу существующей программы, поэтому он попадает в "Очередь задач" (Task Queue), где специальный механизм "Цикл событий" (Event Loop) следит, если "Стек вызовов" пуст, то из "Очереди задач" берётся первая задача и запускается.
+# Слайд 6
+Давайте посомтрим, как это работает на практике:
+Есть специальный стенд, который имитирует взаимодействие JavaScript и WEB API
+(Синхронный режим)
+# Слайд 7
+(Асинхронный режим таймаут)
+# Слайд 8
+(Асинхронный режим таймаут и клик)
+# Слайд 9
+Теперь давайте разберём приёмы работы с асинхронным WEB API.
+Первый способ, который мы уже по сути рассмотрели - это "callback". Его суть заключается в том, что мы передаем в вызов функцию, которая должна выполниться по завершении работы асинхронного метода.
+# Слайд 10
+В примере есть функция asyncFn, которая выполняет какой-то асинхронный код. В числе прочих, эта функция также принимает аргумент callback - функцию, которая вызывается, когда асинхронный код завершается. В качестве аргумента, в callback передается результат работы асинхронного кода.
+# Слайд 11
+При реальном использовании такого подхода, всплывает ряд особенностей:
+  * Часто нужно загружать данные последовательно, например, загрузить список пользователей, затем, загрузить публикации этих пользователей, затем загрузить комментарии к этим публикациям, ... В таких случаях код может выглядеть примерно так: (пример callback-hell). Такой код трудно воспринимать и трудно поддерживать.
+  * Иногда наоборот нужно загрузить начать загружать данные одновременно, но обработку начать выполнять только после загрузки всех данных. Как вариант решения, можно добавить счётчик количества успешных запросов и каждый раз проверять его. Но такое решение тоже не очень удобно для понимания.
+# Слайд 12
+Для решения подобных вопросов в JavaScript был добавлен Promise.
+Promise – это специальный объект, который содержит своё состояние. Вначале ожидание "pending", затем – одно из: выполнено успешно "resolved" или выполнено с ошибкой "rejected".
+# Слайд 13
+Рассмотрим на примере: у нас есть функция которая выполняет какой-то асинхронный код. Эта функция возвращает объект Promise. После выполнения асинхронного кода, в зависимости от того успешно ли он выполнился, мы можем вызвать один из двух методов: resolve с результатом, если асинхронный код выполнился успешно, или reject с ошибкой, если асинхронный код выполнился неуспешно. При вызове такой асинхронной функции, мы можем вызвать у результата метод then для обработки успешного ответа или catch для обработки неуспешного ответа.
+# Слайд 14
+Если не нужно выполнять какой-то код, а просто создать объект Promise с уже известным результатом, можно воспользоваться конструкцией Promise.resolve(value), для успешного результата, или Promise.reject(error) для ошибки.
+Promise.then() также возвращает объект Promise, т.е. к нему также можно применить метод then, таким образом можно разбить обработку ответа на несколько этапов. Такой подход называется цепочка обещаний "Promise chaining".
+# Слайд 15
+Также Promise умеют "схлопываться", при этом схлопываются только resolve.
+# Слайд 16
+Вот живой пример того, как работают Promise.
+# Слайд 17
+А вот как пример того, как решаются проблемы callback при использовании Promise:
+  * Для последовательных запросов, лестница в callback-hell превращается в цепочку промисов, где после получения результатов мы их сохраняем и возвращаем Promise на следующий запрос, а в конце возвращаем все результаты разом.
+  * Обработка параллельных запросов реализуется ещё проще, поскольку есть метод встроенный Promise.all, который принимает массив промисов и возвращает новый промис, который выполняется при выполнении всех промисов из массива.
+  * Кроме того в новом стандарте JavaScript была добавлена функция fetch для выполнения запросов, которая возвращает Promise и теперь метод request может выглядеть так (пример request с fetch)
+# Слайд 18
+И наконец одно из последних нововведений в языке JavaScript - это конструкция async и await. Давайте рассмотрим принцип их действия на примерах:
+  * Простейшая функция, если её вызвать, она вернёт 1;
+# Слайд 19
+  * Если мы добавим async перед функцией, то вместо 1, функция вернёт Promise в состоянии "resolved" с результатом 1;
+  * Если необходимо, чтобы Promise был в состоянии "rejected", то вместо retun нужно выбросить исключение "throw";
+# Слайд 20
+  * Тоже самое мы бы получили, если бы функции непосредственно возвращали Promise в соответствующем состоянии.
+# Слайд 21
+  * А что если перед функцией, которая возвращает Promise добавить async? Она всё-равно вернёт Promise с результатом 1.
+# Слайд 22
+Теперь await: тут всё просто, если мы укажем await перед вызовом асинхронной функции, то выполнение приостановится до завершения работы асинхронной функции, затем будет получен результат и выполнение продолжится в обычном "синхронном" режиме. Важное замечание: функция, внутри которой используется конструкция await, должна быть объявлена как async.
+# Слайд 23
+Для того обработки ошибок, нужно обернуть вызов в try...catch.
+# Слайд 24
+Теперь давайте посмотрим, как изменится код нашего примера, если написать его с  использованием async/await:
+  * Изменился метод request, теперь он выглядит почти как обычный синхронный метод.
+  * Заметьте, что получение json из ответа fetch - тоже асинхронная операция.
+  * Для последовательных запросов, мы с помощью await синхронно заполняем массив ответов и обрабатываем его.
+  * Для параллельных - запросы также оборачиваются в Promise.all
